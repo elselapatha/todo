@@ -1,11 +1,22 @@
 import React from 'react';
-import { DatePicker } from 'antd';
-import './App.sass';
+import { Layout } from 'antd'
+import Header from './components/header/Header'
+import TodoList from './components/todo/TodoList'
 
-function App() {
+import './App.sass';
+function App () {
   return (
     <div className="App">
-      <div className="w-screen h-screen bg-gray-700 text-4xl"><DatePicker /></div>
+      <Layout className="layout h-screen">
+        <Layout.Content className="p-4 lg:p-20 bg-gray-100">
+          <div className="w-full h-full flex justify-center items-center">
+            <div className="w-full lg:w-2/3 bg-white flex flex-col rounded-2xl shadow-lg h-full">
+              <Header />
+              <TodoList />
+            </div>
+          </div>
+        </Layout.Content>
+      </Layout>
     </div>
   );
 }
