@@ -10,7 +10,7 @@ import { FiCircle, FiTrash2 } from 'react-icons/fi'
 
 import TodoItem from './types'
 
-import { remove, done } from './tasksSlice';
+import { removeTodoAsync, doneTodoAsync } from './tasksSlice';
 
 interface Props {
   item: TodoItem
@@ -40,7 +40,7 @@ class TodoListItem extends Component<Props>{
           {item.done ? <HiCheckCircle size="24px" className="text-green-500 ml-1 mr-5" /> : <FiCircle size="24px" className="text-gray-400 ml-1 mr-5 group-hover:text-emerald-500" onClick={this.done} style={{ fill: 'white' }} />}
         </div>
         <div>
-          <span>{item.title}</span>
+          <span className={classNames({ 'line-through': item.done })}>{item.title}</span>
           <div className="text-sm text-gray-400">{moment(item.timestamp).fromNow()}</div>
         </div>
       </div>
@@ -51,8 +51,8 @@ class TodoListItem extends Component<Props>{
 }
 
 const mapDispatchToProps = {
-  removeTask: remove,
-  doneTask: done
+  removeTask: removeTodoAsync,
+  doneTask: doneTodoAsync
 }
 
 export default connect(null, mapDispatchToProps)(TodoListItem)

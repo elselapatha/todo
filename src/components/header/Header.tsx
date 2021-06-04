@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { add } from '../todo/tasksSlice';
+import { postTodoAsync } from '../todo/tasksSlice';
 import TodoItem from '../todo/types'
 
 import { v4 as uuid } from 'uuid'
@@ -28,6 +28,7 @@ class Header extends Component<Props, State> {
       done: false
     })
     this.setState({ title: '' })
+    console.log('Added Successfully');
     event.preventDefault()
   }
 
@@ -52,4 +53,4 @@ class Header extends Component<Props, State> {
   }
 }
 
-export default connect(null, { addTask: add })(Header)
+export default connect(null, { addTask: postTodoAsync })(Header)

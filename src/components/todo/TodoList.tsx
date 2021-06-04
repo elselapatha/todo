@@ -1,32 +1,37 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import { List } from 'antd'
+import { List, Spin } from 'antd'
 import TodoListItem from './TodoListItem'
 import TodoItem from './types'
 
-import { selectTasks } from './tasksSlice';
+import { selectTasks, selectLoading } from './tasksSlice';
+import { RootState } from '../../app/store'
 
 interface Props {
-  tasks: Array<TodoItem>
+  tasks: Array<TodoItem>,
+  loading: boolean
 }
 
 class TodoList extends Component<Props> {
 
   render () {
     return <div className="px-8 my-6 h-full overflow-auto">
-      <List
-        split={false}
-        itemLayout="horizontal"
-        size="small"
-        dataSource={this.props.tasks}
-        renderItem={item => <TodoListItem item={item} />}
-      />
+      <Spin tip="Loading..." spinning={false}>
+        <List
+          split={false}
+          itemLayout="horizontal"
+          size="small"
+          dataSource={this.props.tasks}
+          renderItem={item => <TodoListItem item={item} />}
+        />
+      </Spin>
     </div>
   }
 }
-const mapStateToProps = (state: any) => ({
-  tasks: selectTasks(state)
+const mapStateToProps = (state: RootState) => ({
+  tasks: selectTasks(state),
+  loading: selectLoading(state)
 });
 
 export default connect(mapStateToProps)(TodoList)

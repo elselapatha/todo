@@ -6,8 +6,10 @@ import './index.sass';
 import 'antd/dist/antd.css';
 import App from './App';
 import { store } from './app/store';
+import { loadTodoAsync } from './components/todo/tasksSlice'
 import reportWebVitals from './reportWebVitals';
 
+store.dispatch(loadTodoAsync())
 
 ReactDOM.render(
   <React.StrictMode>
